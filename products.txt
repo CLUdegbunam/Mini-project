@@ -1,0 +1,9 @@
+BLT Sandwich
+Cappuccino
+Espresso
+Latte
+Macchiato
+Mocha
+Iced Coffee
+Blueberry Muffin
+French Toast
