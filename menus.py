@@ -29,7 +29,7 @@ ORDERS MENU
 -----------
 0. Return To Main Menu
 1. Display Orders list
-2. Order Status
+2. Add New Order
 3. Update Order Status
 4. Update Order Status
 5. Delete Order

@@ -1,5 +1,5 @@
 import os
-from typing import Dict, List
+from typing import List, Dict
 import csv
 
 def clear_screen():
@@ -51,17 +51,31 @@ def save_couriers(couriers: List[str]) -> None:
         return couriers_list
 
 #orders function
-def load_orders(filename):
+def load_orders(orders: List[dict]) -> None:
     orders = []
-    with open(filename, "r") as file:
-        csv_file = csv.DictReader(file)
-        for row in csv_file:
-            orders.append(row)
+    try:
+        with open("orders.csv", "r") as file:
+            csv_file = csv.DictReader(file)
+            for row in csv_file:
+                orders.append(row)
+    except Exception as e:
+        print("No file loaded")
     return orders
 
-# def add_order(orders: List[dict]):
-#     with open("orders.csv", "a") as file:
-#         field_names = ["customer_name", "customer_address","customer_phone", "courier", "status"]
-#         writer = csv.DictWriter(file, delimiter=",")
-#         orders = writer.writerow(field_names)
-#         return orders
+def add_order(new_order: dict):
+    with open("orders.csv", "a") as file:
+        field_names = ["customer_name", "customer_address","customer_phone", "courier", "status"]
+        writer = csv.DictWriter(file, delimiter=",")
+        new_order = writer.writerow(field_names)
+    return new_order
+
+def save_orders(orders: List[dict]):
+    
+    with open("orders.csv", "w", newline='') as file:
+        field_names = ["customer_name", "customer_address","customer_phone", "courier", "status"]
+        writer = csv.DictWriter(file, fieldnames=field_names)
+        writer.writeheader()
+        # instruct the writer to write the row
+        for order in orders:
+            writer.writerow(order)
+    return orders
