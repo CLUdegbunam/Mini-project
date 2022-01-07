@@ -1,11 +1,11 @@
-from data import load_orders, load_products, save_products, clear_screen, add_product, load_couriers, add_courier, save_couriers, save_orders
+from data import load_orders, load_products, save_products, clear_screen,load_couriers,save_couriers, save_orders
 from menus import main_menu, products_menu, couriers_menu, orders_menu
 
 print("WELCOME TO CAFE COFFEE")
 
-products_list = load_products("products_list")
-couriers_list = load_couriers("couriers_list")
-orders_list = load_orders("orders")
+products_list = load_products([])
+couriers_list = load_couriers([])
+orders_list = load_orders([])
 #print(orders_list)
 
 #main menu options
@@ -29,34 +29,40 @@ while(True):
                 break
             elif products_menu_options == 1:
                 clear_screen()
-                products = load_products(products_list)
-                print(f"Your products are: {products}")
+                print(f"Your products are {products_list}")
             elif products_menu_options == 2:
                 clear_screen()
                 #Add new product
-                products = load_products(products_list)
-                new_product = input("Please add new product: ")
-                new_product = add_product(new_product)
+                product_name = input("Please add new product: ")
+                price = float(input("Enter Price: "))
+                new_product = {
+                                "product_name": product_name,
+                                "price": price
+                                }
+                products_list.append(new_product)
+                
             elif products_menu_options == 3:
                 clear_screen()
                 # Update Product
-                try:
-                    index = int(input("Enter product index:  "))
-                except:
-                     print("Invalid Entry")
-                new_product = input("Please enter product: ")
-                products = load_products(products_list)
-                products[index] = new_product
-                save_products(products)
+                for index, product in enumerate(products_list):
+                    print(index, product)
+                product_index = int(input("Enter product Index: "))
+                product_to_update = products_list[product_index]
+                updated_product_name = input("Enter New product: ")
+                updated_price = float(input("Enter Price: "))
+                product_to_update.update({"product_name": updated_product_name, 
+                                          "price": updated_price})
+               
             elif products_menu_options == 4:
                 clear_screen()
-                products = load_products(products_list)
+                #Delete product
+                for index, product in enumerate(products_list):
+                    print(index, product)
                 try:
                     index = int(input("Enter product index: "))
                 except:
                      print("Invalid Entry")
-                del products[index]
-                save_products(products)
+                del products_list[index]
                
     elif main_menu_options == 2:
         # couriers menu            
@@ -67,36 +73,41 @@ while(True):
                 print("Return to main menu")
                 break
             elif couriers_menu_options == 1:
-                clear_screen()
-                couriers = load_couriers(couriers_list) 
-                print(f"Your couriers are: {couriers}")
+                clear_screen() 
+                print(f"Your couriers are: {couriers_list}")
             elif couriers_menu_options == 2:
                 clear_screen()
-                 #Add new product
-                couriers = load_couriers(couriers_list)
-                new_courier = input("Please add new courier: ")
-                new_courier = add_courier(new_courier)
+                 #Add new courier
+                courier_name = input("Please add new courier: ")
+                phone = int(input("Enter Phone Number: "))
+                new_courier = {
+                                "courier_name": courier_name,
+                                "phone": phone
+                                }
+                couriers_list.append(new_courier)
+                
             elif couriers_menu_options == 3:
                 clear_screen()
                 # Update courier
-                try:
-                    index = int(input("Enter courier index: "))
-                except:
-                    print("Invalid Entry")
-                new_courier = input("Please enter courier: ")
-                couriers = load_couriers(couriers_list)
-                couriers[index] = new_courier
-                save_couriers(couriers)
+                for index, courier in enumerate(couriers_list):
+                    print(index, courier)
+                courier_index = int(input("Enter courier Index: "))
+                courier_to_update = couriers_list[courier_index]
+                updated_courier_name = input("Enter New courier: ")
+                updated_phone = int(input("Enter Phone: "))
+                courier_to_update.update({"courier_name": updated_courier_name, 
+                                          "phone": updated_phone})
+                   
             elif couriers_menu_options == 4:
                 clear_screen()
                # delete courier
-                couriers = load_couriers(couriers_list)
+                for index, courier in enumerate(couriers_list):
+                    print(index, courier)
                 try:
                     index = int(input("Enter courier index: "))
                 except:
                     print("Invalid Entry")
-                del couriers[index]
-                save_couriers(couriers)
+                del couriers_list[index]
                 
     elif main_menu_options == 3:
         #Orders Menu
@@ -132,20 +143,20 @@ while(True):
                 orders_list.append(new_order)
                         
             elif(orders_menu_options == 3):
-                load_orders(orders_list)
+                #load_orders(orders_list)
                 for index, order in enumerate(orders_list):
                     print(index, order)
-                orders = int(input("Enter Order Index: "))
-                for index, status in enumerate(orders_list):
-                    print(index, status)
+                order_index = int(input("Enter Order Index: "))
+                order_to_update = orders_list[order_index]
                 updated_status = input("Enter New Status: ")
-                order.update({"status": updated_status})
+                #order_to_update["status"] = updated_status
+                order_to_update.update({"status": updated_status})
                
-            elif(orders_menu_options == 4):
-                # load_orders(orders_list)
-                # for index, order in enumerate(orders_list):
-                #     print(index, order)
-                # orders = int(input("Enter Order Index: "))
-                 pass       
+            # elif(orders_menu_options == 4):
+            #     load_orders(orders_list)
+            #     for index, order in enumerate(orders_list):
+            #          print(index, order)
+            #     orders_index = int(input("Enter Order Index: "))
+                        
             elif(orders_menu_options == 5):
                 pass

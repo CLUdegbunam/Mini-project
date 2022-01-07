@@ -2,3 +2,4 @@ customer_name,customer_address,customer_phone,courier,status
 kate,52 wonder street london,09876458,1,pending
 Sarah,24 green road london,978556,2,pending
 John,28 yellow brick road oz,789345621,0,on its way
+Harry Potter,Hogwarts,1222311,0,Delived
