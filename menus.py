@@ -1,7 +1,7 @@
 main_menu = '''
 MAIN MENU
 ---------
-0. Save And Exit
+0. Exit
 1. Products Menu
 2. Couriers Menu
 3. Order Menu'''
@@ -31,6 +31,6 @@ ORDERS MENU
 1. Display Orders list
 2. Add New Order
 3. Update Order Status
-4. Update Order Status
+4. Update Order 
 5. Delete Order
 '''
