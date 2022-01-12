@@ -46,7 +46,7 @@ def get_products():
     sql = "select * from products"
     products = execute_query(sql)
     return products
-
+        
 def add_product(name: str, price: float):
     sql = f"insert into products (name, price) values ('{name}','{price}')"
     execute_query(sql)

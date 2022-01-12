@@ -24,9 +24,10 @@ while(True):
             elif products_menu_options == 1:
                 clear_screen()
                 products = db.get_products()
-                print(f"Your Products are: {products}")
+                for product in products:
+                    print(f"{product['id']}. {product['name']} : £{product['price']}")
 
-            elif products_menu_options == 2:
+            elif products_menu_options == 2: 
                 clear_screen()
                 db.get_products()
                 #Add new product
@@ -58,9 +59,9 @@ while(True):
                     print(f"{product['id']}. {product['name']}")
                 try:           
                     id = int(input("Enter product id: "))
+                    db.delete_product(id)
                 except:
                     print("Invalid Entry")
-                    db.delete_product(id)
                 
                
     elif main_menu_options == 2:
@@ -75,7 +76,8 @@ while(True):
             elif couriers_menu_options == 1:
                 clear_screen() 
                 couriers = db.get_couriers()
-                print(f"Your Couriers are: {couriers}")
+                for courier in couriers:
+                    print(f"{courier['id']}. {courier['name']}, {courier['phone']}")
             
             elif couriers_menu_options == 2:
                 clear_screen()
@@ -109,9 +111,9 @@ while(True):
                     print(f"{courier['id']}. {courier['name']}")
                 try:           
                     id = int(input("Enter Courier id: "))
+                    db.delete_courier(id)
                 except:
                     print("Invalid Entry")
-                    db.delete_courier(id)
                 
             
     elif main_menu_options == 3:
@@ -125,9 +127,10 @@ while(True):
             elif orders_menu_options == 1:
                 clear_screen()
                 orders = db.get_orders()
-                print(f"Your orders are: {orders}")
+                for order in orders:
+                    print(f"{order['id']}, {order['customer_name']}, {order['customer_address']}, {order['customer_phone']}, {order['courier_id']}, {order['status_id']}, {order['items']}")
     
-            elif(orders_menu_options == 2):
+            elif(orders_menu_options == 2): # Create order
                 clear_screen()
                 # Collect some data
                 customer_name = input("Enter Name: ")
@@ -144,10 +147,11 @@ while(True):
                 items = input("Enter items: ")
                 db.add_order(customer_name, customer_address, customer_phone, courier_id, status_id, items)
                         
-            elif(orders_menu_options == 3):
+            elif(orders_menu_options == 3): # update order status
                 clear_screen()
                 orders = db.get_orders()
-                print(f"Your orders are: {orders}")
+                for order in orders:
+                    print(f"{order['id']}, {order['customer_name']}, {order['customer_address']}, {order['customer_phone']}, {order['courier_id']}, {order['status_id']}, {order['items']}")
                 id = int(input("Enter Order id: "))
                 status = db.get_status()
                 for s in status:
